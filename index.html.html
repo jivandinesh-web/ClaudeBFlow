@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en-ZA"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BrandFlow Ops – Merchcraft Studio</title>
+<style>
+:root{--o:#b8420f;--o2:#fdece3;--bg:#faf7f5;--card:#fff;--ink:#1f2430;--mut:#6b7280;--ln:#ece7e3;--g:#0f7a4a;--g2:#dff5e9;--b:#4f46e5;--sb:#f4f0ed;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15171c;--card:#1e2128;--ink:#eceef2;--mut:#9aa1ae;--ln:#2e323b;--sb:#1a1d23;--o2:#3a2418;--g2:#15382a}}
+:root[data-theme="dark"]{--bg:#15171c;--card:#1e2128;--ink:#eceef2;--mut:#9aa1ae;--ln:#2e323b;--sb:#1a1d23;--o2:#3a2418;--g2:#15382a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.4 Inter,system-ui,Segoe UI,Arial,sans-serif}
+.app{display:flex;min-height:100vh}
+aside{width:230px;background:var(--sb);padding:16px 12px;flex:none;display:flex;flex-direction:column;gap:6px}
+.logo{display:flex;gap:10px;align-items:center;margin-bottom:10px}.logo i{width:34px;height:34px;border-radius:9px;background:var(--o);display:block}
+.logo b{display:block}.logo small{color:var(--mut);font-size:10px;letter-spacing:.5px}
+.hub{background:var(--card);border-radius:10px;padding:8px 10px;font-size:12px;margin-bottom:8px}.hub em{color:var(--g);font-style:normal}
+.sec{font-size:11px;letter-spacing:.6px;color:var(--mut);margin:12px 6px 2px;font-weight:600}
+.nav{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:9px;cursor:pointer;border:0;background:none;color:var(--ink);font:inherit;text-align:left;width:100%}
+.nav.on{background:var(--o);color:#fff}.nav span{font-size:11px;background:var(--card);color:var(--ink);padding:1px 7px;border-radius:6px}
+.nav.on span{background:#ffffff33;color:#fff}
+.util{margin-top:auto;background:var(--card);border-radius:10px;padding:10px;font-size:11px}
+.bar{height:6px;border-radius:6px;background:var(--ln);overflow:hidden}.bar i{display:block;height:100%;background:var(--o)}
+main{flex:1;min-width:0}
+.top{display:flex;gap:10px;align-items:center;padding:12px 18px;background:var(--bg);position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+.top input{flex:1;padding:10px 12px;border-radius:9px;border:1px solid var(--ln);background:var(--card);color:var(--ink)}
+.btn{background:var(--o);color:#fff;border:0;padding:9px 14px;border-radius:9px;font:600 13px inherit;cursor:pointer}
+.btn.s{background:var(--card);color:var(--ink);border:1px solid var(--ln)}.btn.b{background:var(--b)}.btn.g{background:var(--g)}
+.me{display:flex;gap:8px;align-items:center;font-size:12px}.me i{width:32px;height:32px;border-radius:50%;background:#c9a99a;display:block}
+.pg{padding:6px 18px 30px;display:none}.pg.on{display:block}
+h1{margin:4px 0;font-size:26px}h2{margin:0 0 8px;font-size:16px}
+.card{background:var(--card);border:1px solid var(--ln);border-radius:14px;padding:14px;margin-bottom:14px}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}.grow{flex:1}
+.kp{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:12px 0}
+.kp .card{margin:0}.kp small{font-size:10px;letter-spacing:.5px;color:var(--mut)}.kp b{display:block;font-size:30px}
+.tag{font-size:11px;padding:2px 8px;border-radius:8px;background:var(--o2);color:var(--o);font-weight:600}.tag.g{background:var(--g2);color:var(--g)}
+.stg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}.stg div{background:var(--bg);border-radius:10px;padding:10px;font-size:12px}.stg b{display:block;font-size:14px}
+.job{display:flex;gap:14px;flex-wrap:wrap}.job .ph{width:130px;height:110px;border-radius:10px;background:linear-gradient(135deg,#6b5a50,#2b2420);color:#fff;font-size:10px;padding:6px;font-weight:700}
+.job .c{min-width:120px}.job small{display:block;font-size:10px;color:var(--mut);letter-spacing:.4px}
+.g3{display:grid;grid-template-columns:240px 1fr 280px;gap:14px;align-items:start}
+@media(max-width:1100px){.g3{grid-template-columns:1fr}aside{width:70px}aside .hide{display:none}}
+@media(max-width:700px){.app{flex-direction:column}aside{width:auto;flex-direction:row;overflow-x:auto;padding:8px}aside .sec,aside .util,aside .hub{display:none}.nav{white-space:nowrap}}
+.pre{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:8px 0}.pre button{padding:9px;border-radius:8px;border:1px solid var(--ln);background:var(--bg);color:var(--ink);cursor:pointer;font:inherit}.pre button.on{background:var(--o);color:#fff}
+.fld{display:grid;grid-template-columns:1fr 1fr;gap:8px}.fld label{font-size:11px;color:var(--mut)}.fld input{width:100%;padding:7px;border:1px solid var(--ln);border-radius:7px;background:var(--bg);color:var(--ink)}
+.opt{display:block;padding:10px;border-radius:10px;background:var(--bg);margin:6px 0;cursor:pointer;font-size:12px}
+.cv{background:#2a2f3a;border-radius:14px;position:relative;overflow:hidden;touch-action:none}.cv svg{display:block;width:100%;height:auto}
+.tb{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px;background:#1f2430;padding:6px 10px;border-radius:12px}
+.tb button{background:none;border:0;color:#fff;cursor:pointer;font:inherit;padding:4px 8px}
+.pt{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}.pt button{flex:1;min-width:110px;padding:10px;border-radius:10px;border:1px solid var(--ln);background:var(--card);color:var(--ink);cursor:pointer;font:inherit;text-align:left}.pt button.on{border:2px solid var(--o)}
+.kv{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--ln);font-size:12px}.kv b{text-align:right}
+.note{background:var(--o2);border-radius:10px;padding:10px;font-size:12px;margin:10px 0}
+.ck{display:flex;gap:10px;align-items:flex-start;padding:10px;border-radius:10px;background:var(--bg);margin-bottom:8px;font-size:13px}
+.ck i{width:22px;height:22px;border-radius:50%;background:var(--g);color:#fff;font-style:normal;text-align:center;flex:none}.ck i.w{background:var(--o)}
+table{width:100%;border-collapse:collapse;font-size:12px}th{text-align:left;background:var(--bg);padding:8px;font-size:11px}td{padding:8px;border-bottom:1px solid var(--ln)}
+.tabs{display:flex;gap:6px;margin-bottom:10px}.tabs button{flex:1;padding:10px;border-radius:9px;border:1px solid var(--ln);background:var(--card);color:var(--ink);cursor:pointer;font:inherit}.tabs button.on{background:var(--o2);color:var(--o);font-weight:600}
+.pane{display:none}.pane.on{display:block}
+.slide{position:fixed;top:0;right:0;bottom:0;width:min(460px,100%);background:var(--card);box-shadow:-8px 0 30px #0003;padding:20px;overflow:auto;transform:translateX(105%);transition:.25s;z-index:20}.slide.on{transform:none}
+.big{font-size:22px;color:var(--o);font-weight:700}
+</style></head><body>
+<div class="app">
+<aside>
+<div class="logo"><i></i><div class="hide"><b>BrandFlow Ops</b><small>MERCHCRAFT STUDIO</small></div></div>
+<div class="hub hide"><b>Benoni Print Hub</b><br><em>Operational • Online</em></div>
+<div class="sec hide">OPERATIONS PIPELINE</div>
+<button class="nav on" data-v="0">Orders &amp; Pipeline <span>24</span></button>
+<button class="nav" data-v="1">Design Studio <span>Proofing</span></button>
+<button class="nav" data-v="2">Production &amp; QC <span>8 In QC</span></button>
+<button class="nav" data-v="3">Billing &amp; Paperwork</button>
+<div class="sec hide">CATALOGUE &amp; INVENTORY</div>
+<button class="nav">Garments &amp; Blanks</button><button class="nav">Pantone &amp; Threads</button>
+<div class="util"><div class="row" style="justify-content:space-between"><b>PRESS UTILIZATION</b><b style="color:var(--o)">86%</b></div><div class="bar"><i style="width:86%"></i></div><div style="margin-top:4px;color:var(--mut)">4 Automatic presses active</div><div style="margin-top:8px"><b>v3.4.1 Production</b></div></div>
+</aside>
+<main>
+<div class="top"><input placeholder="Search job #, client, vector proof, or SKU..."><button class="btn" onclick="go(0)">+ New Request</button><div class="me"><i></i><div><b>Elena Rostova</b><br><small>Lead Production Mgr</small></div></div></div>
+
+<!-- 0 ORDERS -->
+<section class="pg on" id="p0">
+<div class="row"><div class="grow"><small style="color:var(--o);font-weight:700">PRODUCTION OPERATIONS • Telemetry Synced</small><h1>Orders &amp; Live Pipeline</h1><small>Q2 Velocity Target: 94.2% • Values in ZAR (R) incl. VAT 15%</small></div>
+<select class="btn s"><option>All Imprint Methods</option></select><select class="btn s"><option>Rush &amp; Standard (Next 14 Days)</option></select><button class="btn">Create Intake Request</button></div>
+<div class="kp"><div class="card"><small>PIPELINE GROSS</small><b>R1 516 500</b><small style="color:var(--g)">+18.4% vs last cycle</small></div>
+<div class="card"><small>CLIENT REQUESTS</small><b>8</b><small>3 inbound past hour</small></div><div class="card"><small>QUOTES PENDING</small><b style="color:var(--o)">5</b><small>Avg turn: 3.2 hrs</small></div>
+<div class="card"><small>DESIGN STUDIO</small><b style="color:var(--o)">12</b><small>4 awaiting approval</small></div><div class="card"><small>PRODUCTION &amp; QC</small><b style="color:var(--o)">18</b><small>8 in post-cure audit</small></div><div class="card"><small>READY TO DISPATCH</small><b>7</b><small>Carrier pickup 4:30 PM</small></div></div>
+<div class="card"><h2>Manufacturing Life Cycle Protocol</h2><div class="stg"><div>01. INTAKE<b>Client Request</b>Inbound brief, specs</div><div>02. ESTIMATION<b>Quote Generated</b>Blank stock pricing</div><div style="background:var(--o2)">03. CREATIVE PREP<b>Approved Mockup</b>Vector proofing</div><div>04. SHOP FLOOR<b>Production &amp; QC</b>Press runs, embroidery</div><div>05. FULFILLMENT<b>Dispatch &amp; Bill</b>Freight bill of lading</div></div></div>
+<h2>Active Job Stream <span class="tag">4 Priority Focus</span></h2><div id="jobs"></div>
+<div class="row"><div class="card grow"><h2>Substrate Allocation</h2><div class="kv"><span>Apparel &amp; Fleece</span><b>45%</b></div><div class="kv"><span>Drinkware &amp; Ceramic</span><b>30%</b></div><div class="kv"><span>Headwear &amp; Accessories</span><b>25%</b></div></div>
+<div class="card grow"><h2>QC Gate Metrics <span class="tag g">99.1% Yield</span></h2><div class="kv"><span>Pantone Colour Match (ΔE &lt; 1.5)</span><b>99.4%</b></div><div class="kv"><span>Wash Cure &amp; Adhesion</span><b>98.8%</b></div><div class="kv"><span>Vector Registration</span><b>100%</b></div></div>
+<div class="card grow"><h2>Automated Stage Gates</h2><label><input type="checkbox" checked> Direct-to-Proof Lock</label><p style="font-size:12px;color:var(--mut)">Auto-transition orders to Design Studio once customer quote receives digital signature.</p></div></div>
+</section>
+
+<!-- 1 DESIGN -->
+<section class="pg" id="p1">
+<div class="card"><div class="row"><h2 style="font-size:22px">Order #BF-4092</h2><span class="tag">Apex Tech Summit 2025</span><span class="tag" style="background:#e0e0ff;color:var(--b)">Quote #Q-8821 Approved</span><span class="tag g">Vector Assets Preflight Passed</span></div>
+<div style="margin:6px 0;color:var(--mut)">Target Item: Heavyweight French Terry Drop-Shoulder Hoodie (Slate Oatmeal) · Screen Print Front / Embroidery Back</div>
+<div class="row"><button class="btn s" onclick="rst()">↺ Reset</button><button class="btn s" onclick="zm()">🔍 <span id="zv">100</span>%</button><button class="btn s" onclick="sz()">Safe Zones: <span id="sv">ON</span></button><button class="btn b" onclick="alert('Spec sheet generated')">Spec Sheet</button><button class="btn" onclick="this.textContent='✓ Sent to Press'">Approve &amp; Send to Press</button></div></div>
+<div class="g3">
+<div>
+<div class="card"><h2>Client Artworks <span class="tag">2 Assets</span></h2><div class="kv"><span>Apex_Summit_… <br><small style="color:var(--g)">Vector Curvature: Validated</small></span><b>◉</b></div><div class="kv"><span>Apex_Mark_Ba… <br><small>Spot Colour Layers: 2</small></span><b>○</b></div><label class="btn s" style="display:block;text-align:center;margin-top:10px;cursor:pointer">☁ Upload Vector Revision<input type="file" id="up" accept="image/*" hidden></label></div>
+<div class="card"><h2>Dimensions &amp; Offset <small style="color:var(--o)">MILLIMETRES (MM)</small></h2><small style="color:var(--mut)">STANDARD PRESETS</small>
+<div class="pre" id="pre"></div>
+<div class="fld"><div><label>Width (W)</label><input id="iw" type="number" step="1"></div><div><label>Height (H)</label><input id="ih" type="number" step="1"></div><div><label>Collar Gap (Y)</label><input id="ig" type="number" step="1"></div><div><label>Rotation (deg)</label><input id="ir" type="number"></div></div></div>
+<div class="card"><h2>Print Technique <small style="color:var(--g)">Press #03 Ready</small></h2>
+<label class="opt"><input type="radio" name="t" checked> <b>Screen Print (2-Hit Plastisol)</b> <span class="tag">Primary</span><br>Mesh 160 • Flash Cure Req.</label>
+<label class="opt"><input type="radio" name="t"> <b>Embroidery Polyneon</b><br>6,400 Stitches • Madeira 1801</label>
+<label class="opt"><input type="radio" name="t"> <b>Laser Rotary Engrave</b><br>For Stanley 1.2 L Tumbler</label>
+<small style="color:var(--mut)">MATCHED PANTONE COLOURWAY</small><div class="row" style="margin-top:6px"><span class="tag" style="background:#a33900;color:#fff">PMS 1585 C #A33900</span><span class="tag" style="background:#2c3138;color:#fff">PMS Black 7 C #2C3138</span></div></div>
+</div>
+<div>
+<div class="cv"><svg id="sv1" viewBox="0 0 400 360"></svg>
+<div class="tb"><button onclick="snap()">⌖ Snap Centre</button><button onclick="flp()">⇋ Flip</button><button onclick="lk()" id="lkb">🔓 Unlocked</button></div></div>
+<div class="pt" id="pt"></div>
+</div>
+<div>
+<div class="card"><h2>Sign-Off Ledger <span style="color:var(--g)">✓</span></h2><div class="note" style="background:var(--g2)"><b>CLIENT PROOF LOCK: Approved Online</b><br>Signed by: Marcus Vance (VP Mktg)<br>Timestamp: 24 Oct, 14:22:04 SAST</div>
+<div class="kv"><span>Colour Accuracy Risk:</span><b style="color:var(--g)">Low (PMS Verified)</b></div><div class="kv"><span>Substrate Bleed:</span><b>Standard 3 mm</b></div><div class="kv"><span>Total Garment Units:</span><b>450 Units</b></div><div class="kv"><span>B-BBEE Certificate:</span><b style="color:var(--g)">Level 2 • Valid</b></div></div>
+<div class="card"><h2>Press Tech Pack <span class="tag" style="background:var(--bg);color:var(--ink)">SPEC-4092</span></h2>
+<div class="kv"><span>Screen Count</span><b>2 Screens (Base + Hit)</b></div><div class="kv"><span>Mesh Density</span><b>160 Yellow Monofilament</b></div><div class="kv"><span>Squeegee Durometer</span><b>70 / 90 / 70 Triple</b></div><div class="kv"><span>Flash Cure Station</span><b style="color:var(--o)">Required • 6 sec @ 105°C</b></div><div class="kv"><span>Laser Jig Index</span><b>Jig #TUMBLR-40OZ-A</b></div>
+<div class="note"><b>Placement Notice</b><br>Position precisely <b>96 mm down from centre seam</b>. Do NOT stretch collar ribbing over platen head during loading.</div>
+<button class="btn s" style="width:100%" onclick="alert('Factory Tech Pack PDF generated')">Generate Factory Tech Pack PDF</button></div>
+<div class="card"><h2>Pre-Flight Checklist</h2><label class="ck"><input type="checkbox" checked>Vector curves expanded (No live fonts)</label><label class="ck"><input type="checkbox" checked>Underbase choke set to 0.5pt</label><label class="ck"><input type="checkbox" checked>Film positive separation rendered</label></div>
+</div></div>
+</section>
+
+<!-- 2 QC -->
+<section class="pg" id="p2">
+<small style="color:var(--mut)">BENONI PRINT HUB / AUTOMATIC PRESS BAY 02 / <b style="color:var(--o)">ACTIVE STATION QC</b></small>
+<div class="card"><div class="row"><div class="grow"><h2 style="font-size:24px">Order #BF-4092 <span class="tag">Apex Tech Summit 2025</span></h2><div style="color:var(--mut)">500 Heavyweight French Terry Hoodies (Onyx Black) + 500 Matte Powdercoat 700 ml Hydro Tumblers (Laser Etch).<br>Lead Press Operator: Marcus Vance (Press #2) · Station QC Lead: Elena Rostova (Signed In)</div></div>
+<div style="min-width:240px"><small>MILESTONE PROGRESS</small><div class="row" style="gap:4px;margin:6px 0"><div class="bar grow"><i style="width:100%;background:var(--g)"></i></div><div class="bar grow"><i style="width:100%;background:var(--g)"></i></div><div class="bar grow"><i style="width:60%"></i></div><div class="bar grow"></div></div><small>Queue · Printed · QC Gate · Dispatch</small></div></div></div>
+<div class="kp"><div class="card"><small>RUN YIELD</small><b style="color:var(--g)">100.0%</b><small>0 Rejects recorded</small></div><div class="card"><small>GARMENT TOTAL</small><b>500 / 500</b><small>Full size curve verified</small></div><div class="card"><small>HARDWARE TOTAL</small><b>500 / 500</b><small>Tumblers rotary checked</small></div><div class="card"><small>CHECKLIST PROGRESS</small><b style="color:var(--o)" id="cp">5 of 6 Done</b><small>Final polybagging active</small></div></div>
+<div class="row" style="align-items:flex-start"><div style="flex:1;min-width:300px">
+<div class="card"><h2>Approved Production Proof <span class="tag g">Locked v2.4 (Signed)</span></h2><svg viewBox="0 0 400 300" style="width:100%;background:#d8d4d0;border-radius:10px" id="qcs"></svg><small style="color:var(--mut)">Chest Centre: 8.5 cm from collar seam · Vector Width: 260 mm</small>
+<div class="fld" style="margin-top:10px"><div class="kv"><span>Ink Chemistry</span><b>Low-bleed Plastisol</b></div><div class="kv"><span>Flash / Oven Cure</span><b>160°C for 65 sec</b></div><div class="kv"><span>Placement Drift Max</span><b>±3.0 mm</b></div><div class="kv"><span>Tumbler Engraving</span><b>Fiber Laser 35W</b></div></div></div>
+<div class="card"><h2>Floor Photo Attachments <span class="tag g">2 Verified Photos</span></h2><div class="row"><div class="job" style="flex:1"><div class="ph" style="width:100%;height:100px">Chest Print #12/500</div></div><div class="job" style="flex:1"><div class="ph" style="width:100%;height:100px">Tumbler Etch #08/500</div></div></div><button class="btn s" style="width:100%;margin-top:8px">Upload Additional Inspection Shot</button></div></div>
+<div class="card" style="flex:1.4;min-width:320px"><div class="row"><h2 class="grow" style="font-size:20px">QC Protocol &amp; Sign-off</h2><span class="tag g">Defect Counter: 0 Reject / 500</span></div><div id="qc"></div>
+<div class="row" style="justify-content:space-between;margin-top:8px"><span style="color:var(--mut)">Need to flag a misprint or damaged blank?</span><button class="btn s" style="color:var(--o)">⚑ Record Defect Piece</button></div></div></div>
+<div class="card"><h2>Dispatch &amp; Fulfillment Staging <small style="color:var(--mut)">WAREHOUSE STAGING BAY: BAY-04 EAST</small></h2><div class="row"><div class="card grow"><b>Box Manifest &amp; Pallet Count</b><div class="big" style="color:var(--ink)">10 <small>Double-Wall Heavy Cartons</small></div><small>50 units per box · Total Shipment Weight: 84.1 kg</small></div><div class="card grow"><b>Freight &amp; Courier Routing</b><div class="kv"><span>The Courier Guy Freight</span><b class="tag g">Scheduled</b></div><small>Pickup Window: 16:30 – 17:30 SAST</small></div><div class="card grow"><b>QC Certification Seal</b><br><small>ELENA.ROSTOVA//QC-MGR-512 · Hash: 9f8b417e2c</small></div></div>
+<div class="row" style="justify-content:flex-end"><button class="btn s">Generate Packing Slips &amp; Box Labels</button><button class="btn" onclick="this.textContent='✓ Ready for Dispatch'">Approve QC &amp; Mark Ready for Dispatch</button></div></div>
+</section>
+
+<!-- 3 BILLING -->
+<section class="pg" id="p3">
+<div class="row"><div class="grow"><small style="color:var(--o);font-weight:700">FINANCE &amp; BILLING • POST-QC FULFILLMENT GATE</small><h1>Paperwork &amp; Invoicing Suite</h1><small>Batch transformation for QC-approved Job Ticket #JB-9042 • Apex Tech Summit 2024</small></div><span class="tag g">● Accounting Sync: Xero Active</span><button class="btn s">Export PDF Bundle</button><button class="btn b">⇄ Push Ledger</button></div>
+<div class="card" style="margin-top:12px"><h2>Document Lifecycle &amp; Transformation Pipeline</h2><div class="row" style="align-items:stretch"><div class="card grow"><small>ORIGIN MILESTONE</small> <span class="tag g">Approved</span><h2>Quote #Q-8821</h2><small>Signed 18 Apr 2024 • Deposit Recv (R133 650,00)</small><div class="kv"><span>Agreed Valuation</span><b>R267 300,00</b></div></div><div class="card grow"><small>FULFILLMENT MILESTONE</small> <span class="tag">Dispatched</span><h2>Delivery Note #DN-3042</h2><small>QC Gate Cleared: Line Press #2 &amp; Rotary</small><div class="kv"><span>Packing Units</span><b>1,000 / 1,000 pcs</b></div></div><div class="card grow"><small style="color:var(--b)">SETTLEMENT MILESTONE</small> <span class="tag" style="background:#e0e0ff;color:var(--b)">Ready to Post</span><h2>Tax Invoice #INV-2024-910</h2><small>Net 30 Terms • Pre-calibrated VAT (15%)</small><div class="kv"><span>Final Balance Due</span><b style="color:var(--b)">R307 395,00</b></div></div></div>
+<div class="row" style="justify-content:space-between"><small>✓ Quote converted to Delivery Note at 09:42 by Benoni Hub Foreman</small><button class="btn" onclick="tab(1)">Review Generated Tax Invoice</button></div></div>
+<div class="row" style="align-items:flex-start"><div style="flex:2;min-width:320px"><div class="tabs"><button class="on" onclick="tab(0)">Delivery Note #DN-3042</button><button onclick="tab(1)">Tax Invoice #INV-2024-910</button><button onclick="tab(2)">Client Audit Log</button></div>
+<div class="card pane on"><div class="row" style="justify-content:space-between"><div><b>■ BRANDCRAFT MERCHOPS STUDIO</b><br><small>Textile &amp; Promotional Manufacturing Hub #4<br>21 Industrial Road, Benoni, Gauteng 1501 • +27 11 555 0100<br>VAT Reg. No: 4XXXXXXXXX • Reg. No: 2020/123456/07</small></div><div style="text-align:right"><div class="big" style="font-size:28px">DELIVERY NOTE</div>Ref: DN-3042<br>Date: 24 October 2024<br><small style="color:var(--g)">Status: Out for Delivery</small></div></div>
+<div class="row" style="background:var(--bg);border-radius:10px;padding:12px;margin:12px 0;align-items:flex-start"><div class="grow"><small>DELIVER TO (CONSIGNEE)</small><br><b>Apex Tech Summit 2024</b><br>Attn: Logistics Receiving Dock #4 (Gate B)<br>Gallagher Convention Centre • 19 Richards Dr, Midrand<br><small>On-Site Liaison: Marcus Vance (+27 82 555 0199)</small></div><div class="grow"><small>CARRIER &amp; FREIGHT SPECIFICATIONS</small><div class="kv"><span>Carrier:</span><b>The Courier Guy Freight</b></div><div class="kv"><span>Tracking Number:</span><b style="color:var(--b)">TCG 7892 3481 92</b></div><div class="kv"><span>Packaging:</span><b>10 Heavy Double-Wall Cartons</b></div><div class="kv"><span>Gross Weight:</span><b>155.3 kg</b></div></div></div>
+<table><tr><th>#</th><th>Item Description &amp; Specifications</th><th>Qty Ordered</th><th>Qty Shipped</th></tr><tr><td>01</td><td><b>Apex Heavyweight Organic Fleece Hoodie</b><br><small>Colour: Mineral Charcoal | Spec: 4-Colour Front Chest Plastisol + Woven Hem Tag<br>SKU: APP-HD-ORG-09 (Size Breakdown: S:100, M:150, L:150, XL:75, XXL:25)</small></td><td>500</td><td><span class="tag g">500 Shipped</span></td></tr><tr><td>02</td><td><b>Matte Stealth Insulated Tumbler (700 ml)</b><br><small>Colour: Anodised Clay | Spec: 360 Rotary Laser Etch 'Apex 2024 Innovator'<br>SKU: DRK-TM-24-CLY (Individually Boxed with Recycled Kraft Sleeve)</small></td><td>500</td><td><span class="tag g">500 Shipped</span></td></tr></table>
+<div class="note" style="background:var(--bg)"><b>RECEIVING &amp; VISUAL INSPECTION NOTICE</b><br>All quantities have been verified via post-production automated scale triage and batch counting scanners. Recipient must inspect cartons for external puncture, water ingress, or seal tampering prior to sign-off.</div>
+<div class="row" style="justify-content:space-between"><div class="card grow"><small>RECEIVING SIGNATURE &amp; PRINTED NAME</small><br><i>Signatory Dock Official: M. Vance (Dock 4)</i><br><small>Date: 24 Oct 2024 · Time: 11:20 SAST</small></div><div class="card"><b style="color:var(--g)">✓ BENONI QC CERTIFIED</b><br><small>Batch Seal #992-GP</small></div></div></div>
+<div class="card pane"><h2>Tax Invoice #INV-2024-910</h2><table><tr><th>Description</th><th>Qty</th><th>Total</th></tr><tr><td>Apex Heavyweight Organic Fleece Hoodie</td><td>500</td><td>R201 600,00</td></tr><tr><td>Matte Stealth Insulated Tumbler (700 ml)</td><td>500</td><td>R65 700,00</td></tr><tr><td>VAT (15%)</td><td>1</td><td>R40 095,00</td></tr><tr><td><b>Final Balance Due (Net 30)</b></td><td></td><td><b>R307 395,00</b></td></tr></table></div>
+<div class="card pane"><h2>Client Audit Log</h2><div class="kv"><span>Quote #Q-8821 signed</span><b>Apr 18, 2024</b></div><div class="kv"><span>Deposit received (R133 650,00)</span><b>Apr 18, 2024</b></div><div class="kv"><span>Converted to Delivery Note</span><b>09:42 AM</b></div><div class="kv"><span>Receiving signature captured</span><b>Oct 24, 11:20 AM</b></div></div></div>
+<div style="flex:1;min-width:260px"><div class="card"><h2>Client &amp; Spec Snapshot <span class="tag">VIP Enterprise</span></h2><b>Apex Tech Summit</b><br><small>Corporate Accounts Dept • Tier 1</small><div class="kv"><span>TOTAL ITEMS</span><b>1,000 units</b></div><div class="kv"><span>BOXES PACKED</span><b>10 Cartons</b></div><div class="kv"><span>Stitch &amp; Ink Adhesion</span><b style="color:var(--g)">100% Pass</b></div><div class="kv"><span>Laser Scribe Precision</span><b>0.02mm Tol.</b></div></div>
+<div class="card"><h2>Integrated Accounting Ledger</h2><div class="kv"><span>Sage Business Cloud</span><b>Mapped (GL #4010)</b></div><div class="kv"><span>SARS eFiling (VAT201)</span><b>VAT 15% Verified</b></div><div class="kv"><span>PayFast Webhook</span><b>Autopay Ready</b></div><div class="note" style="background:var(--bg)"><b>PAYMENT SETTLEMENT FORECAST</b><br>Expected Clearance: 23 Nov 2024<br>Target Margin: 42.8% (R110 160 Gross)</div></div></div></div>
+<div class="card row" style="justify-content:space-between"><div><b>Fulfillment &amp; Paperwork Final Action</b><br><small>Apex Tech Summit • R307 395,00 total receivable • Signed delivery receipt synced</small></div><div class="row"><button class="btn s" onclick="print()">Print Delivery Note for Shipping Dock</button><button class="btn" onclick="this.textContent='✓ Invoice Sent'">Issue Invoice &amp; Send to Client via Email</button></div></div>
+</section>
+</main></div>
+
+<div class="slide" id="sl"><div class="row" style="justify-content:space-between"><span class="tag g">E-SIGNATURE VERIFIED</span><button class="btn s" onclick="sl.classList.remove('on')">✕</button></div><h2 style="font-size:22px;margin-top:8px">Quote &amp; Pre-Production Spec</h2><small>Apex Tech Summit • Autumn Keynote Pack · DOC #QT-4092-REV3</small>
+<div class="note" style="background:var(--bg)"><b>Signed by Sarah Jenkins</b><br>Chief Executive Officer, Apex Tech · 18 Oct, 14:14 · Authenticated</div>
+<table><tr><th>Description</th><th>Qty</th><th>Total</th></tr><tr><td>Gildan Hammer 380gsm Fleece Hoodies</td><td>500</td><td>R201 600,00</td></tr><tr><td>Screen Setup &amp; Colour Separations</td><td>4</td><td>R3 240,00</td></tr><tr><td>Silkscreen Run Fee (2-location)</td><td>500</td><td>R27 900,00</td></tr><tr><td>Matte Insulated Tumbler 700 ml</td><td>500</td><td>R106 200,00</td></tr><tr><td>Pallet Freight &amp; Liftgate Delivery</td><td>1</td><td>R11 160,00</td></tr></table>
+<div class="kv"><span>Subtotal (excl. VAT)</span><b>R350 100,00</b></div><div class="kv"><span>VAT (15%)</span><b>R52 515,00</b></div><div class="kv"><b>Authorised Total (incl. VAT)</b><b class="big">R402 615,00</b></div>
+<div class="row" style="margin-top:14px"><button class="btn s" onclick="sl.classList.remove('on')">Dismiss Preview</button><button class="btn grow" onclick="sl.classList.remove('on');go(1)">Send to Design Studio Canvas</button></div></div>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+function go(n){$$('.pg').forEach((p,i)=>p.classList.toggle('on',i==n));$$('.nav[data-v]').forEach(b=>b.classList.toggle('on',b.dataset.v==n));scrollTo(0,0)}
+$$('.nav[data-v]').forEach(b=>b.onclick=()=>go(+b.dataset.v));
+function tab(n){$$('#p3 .tabs button').forEach((b,i)=>b.classList.toggle('on',i==n));$$('#p3 .pane').forEach((p,i)=>p.classList.toggle('on',i==n))}
+const jobs=[['MOCKUP READY','#BF-4092','Quote Approved','Apex Tech Summit','500 Heavyweight Hoodies (380gsm) + 500 Laser Engraved Matte Tumblers','R402 615,00','6 Days left','Sarah Jenkins','M&R Auto III','Contact Client','Open in Design Studio',1],['NEW INTAKE','#BF-4088','Client Request Received','Nordic Coffee Co','1,200 Ceramic Diner Mugs - 2-Colour Direct Silkscreen Print','R177 120,00','Pending Quote','Marcus Vance','Valid .AI','Inspect Vector','Draft Quote & Costing',0],['QC PASSED','#BF-4079','Production Floor (QC Pass)','Starlight Media','350 Embroidered Flight Bomber Jackets - 48,000 Stitch','R560 700,00','Zero Defects','Bay 4 Packing','Tomorrow 09:00','View QC Certificate','Prep Delivery Note',2],['EN ROUTE','#BF-4071','Dispatched - Invoice Sent','Pulse Fitness','2,000 Eco Matte Aluminum Sports Bottles (750ml) - Rotary UV Print','R428 580,00','TCG-992A0481','40 Master Boxes','Emailed','Track Delivery','Download Final Invoice',3]];
+$('#jobs').innerHTML=jobs.map(j=>`<div class="card job"><div class="ph">${j[0]}</div><div class="grow"><span class="tag">${j[1]}</span> <span class="tag g">${j[2]}</span><h2 style="margin-top:4px">${j[3]}</h2><small style="letter-spacing:0;font-size:12px">${j[4]}</small></div><div class="c"><small>VALUE</small><b>${j[5]}</b></div><div class="c"><small>STATUS</small><b>${j[6]}</b></div><div class="c"><small>OWNER</small><b>${j[7]}</b></div><div class="c"><small>NEXT</small><b>${j[8]}</b></div>${j[11]==0?'<div style="width:100%"><a href="#" onclick="sl.classList.add(\'on\');return false" style="color:var(--b)">View Signed Quote Details &amp; Breakdown</a></div>':''}<div class="row" style="width:100%"><button class="btn s">${j[9]}</button><button class="btn ${j[11]==1?'':'b'}" onclick="${j[11]==0?'go(1)':j[11]==2?'go(2)':j[11]==3?'go(3)':'go(1)'}">${j[10]}</button></div></div>`).join('');
+const sl=$('#sl');
+/* QC */
+const qcs=[['Print Alignment & Placement (Tolerance ±3mm)','Laser grid verified centre chest position: 8.5cm offset matched.'],['Colour Accuracy & Pantone Match (PMS 1585C)','Calibrated under D65 5000K daylight lightbox with physical formula book.'],['Ink Cure / Wash Fastness & Adhesion Test','Elastic stretch test 200% passed; cross-hatch tape peel showed 0 flaking.'],['Garment Sizing & Count Breakdown','S:100 · M:150 · L:150 · XL:75 · 2XL:25 — Verified 500/500'],['Thread Trimming & Clean Finishing','Pocket bar-tacks and hood drawstring eyelets inspected; loose ends clipped.'],['Hangtags & Individual Polybagging','Batch sealing in progress: 480 of 500 completed at Pack Station B.']];
+let done=5;function drawQC(){$('#qc').innerHTML=qcs.map((q,i)=>`<div class="ck"><i class="${i<done?'':'w'}">${i<done?'✓':'⏳'}</i><div class="grow"><b>${i+1}. ${q[0]}</b><br><small style="color:var(--mut)">${q[1]}</small></div>${i<done?'<span class="tag g">PASSED ✓</span>':'<button class="btn" onclick="done=6;drawQC()">✓ Mark as Verified</button>'}</div>`).join('');$('#cp').textContent=done+' of 6 Done'}drawQC();
+/* Hoodie outline */
+const hood=(t)=>`<g fill="none" stroke="${t}" stroke-width="2.2" stroke-linejoin="round"><path d="M135 62 L170 44 Q200 70 230 44 L265 62 L340 118 L312 164 L282 142 L282 322 L118 322 L118 142 L88 164 L60 118 Z"/><path d="M170 44 Q150 8 200 6 Q250 8 230 44"/><path d="M200 70 L200 150" stroke-dasharray="4 4"/><path d="M165 322 L175 262 L225 262 L235 322"/><path d="M118 300 L282 300"/><path d="M118 142 Q140 150 135 62"/><path d="M282 142 Q260 150 265 62"/></g>`;
+const tum=(t)=>`<g fill="none" stroke="${t}" stroke-width="2.2"><path d="M150 40 L250 40 L240 330 Q200 345 160 330 Z"/><ellipse cx="200" cy="40" rx="50" ry="9"/><path d="M250 90 Q320 100 305 190 Q295 240 244 250"/></g>`;
+const P={cc:{n:'Centre Chest',w:3.5,h:1.8,g:3.8,x:200,r:0},lc:{n:'Left Chest',w:3,h:1.5,g:2.6,x:160,r:0},ub:{n:'Upper Back',w:6,h:2.5,g:1.2,x:200,r:0},rs:{n:'Right Sleeve',w:2,h:1,g:2.2,x:320,r:55}};
+const PX=25,TOP=62;let L={},view=0,zoom=1,safe=true,locked=false,img=null;
+$('#pre').innerHTML=Object.keys(P).map(k=>`<button data-k="${k}">${P[k].n}</button>`).join('');
+$$('#pre button').forEach(b=>b.onclick=()=>{const p=P[b.dataset.k];L={x:p.x,w:p.w,h:p.h,g:p.g,r:p.r,flip:1,k:b.dataset.k};if(b.dataset.k=='ub')sv(1);draw()});
+const views=[['Hoodie Front','Active View'],['Hoodie Back','Embroidery Area'],['Stanley 1.2 L','Rotary Engraving']];
+function sv(n){view=n;draw()}
+function rst(){L={x:200,w:3.5,h:1.8,g:3.8,r:0,flip:1,k:'cc'};zoom=1;$('#zv').textContent=100;view=0;draw()}
+function zm(){zoom=zoom>=1.5?.75:zoom+.25;$('#zv').textContent=Math.round(zoom*100);draw()}
+function sz(){safe=!safe;$('#sv').textContent=safe?'ON':'OFF';draw()}
+function snap(){L.x=200;draw()}function flp(){L.flip*=-1;draw()}
+function lk(){locked=!locked;$('#lkb').textContent=locked?'🔒 Locked':'🔓 Unlocked'}
+function draw(){
+ const h=L.h*PX,w=L.w*PX,y=TOP+L.g*PX+h/2,pc=getComputedStyle(document.documentElement);
+ let g=`<rect width="400" height="360" fill="#2a2f3a"/><g transform="translate(200 180) scale(${zoom}) translate(-200 -180)"><rect x="40" y="0" width="320" height="360" fill="#bfc3ca" opacity=".08"/>${view==2?tum('#cfd3da'):hood('#cfd3da')}`;
+ if(view==1)g+=`<text x="200" y="104" fill="#cfd3da" font-size="10" text-anchor="middle">BACK</text>`;
+ if(safe)g+=`<rect x="${L.x-w/2-8}" y="${y-h/2-8}" width="${w+16}" height="${h+16}" fill="none" stroke="#e5622b" stroke-dasharray="5 4"/><text x="${L.x-w/2-8}" y="${y-h/2-13}" font-size="9" fill="#fff">${(L.g*25.4).toFixed(0)} mm from collar apex</text>`;
+ const logo=img?`<image href="${img}" x="-50" y="-20" width="100" height="40" preserveAspectRatio="xMidYMid meet"/>`:`<polygon points="-50,20 -28,-14 -12,6 -2,-6 10,20" fill="#c2410c"/><polygon points="-12,20 8,-10 24,20" fill="#2c3138"/><text x="30" y="8" font-size="14" font-weight="700" fill="#fff" text-anchor="middle" font-family="Arial">APEX</text>`;
+ g+=`<g id="lg" transform="translate(${L.x} ${y}) rotate(${L.r}) scale(${L.flip*w/100} ${h/40})" style="cursor:${locked?'default':'move'}"><rect x="-50" y="-20" width="100" height="40" fill="#0000" stroke="#e5622b" stroke-width="1"/>${logo}</g>`;
+ g+=`<text x="200" y="352" font-size="10" fill="#fff" text-anchor="middle">${(L.w*25.4).toFixed(0)} × ${(L.h*25.4).toFixed(0)} mm • (X: ${((L.x-200)/PX*25.4).toFixed(0)}, Y: +${(L.g*25.4).toFixed(0)})</text></g>`;
+ $('#sv1').innerHTML=g;
+ $('#iw').value=(L.w*25.4).toFixed(0);$('#ih').value=(L.h*25.4).toFixed(0);$('#ig').value=(L.g*25.4).toFixed(0);$('#ir').value=Math.round(L.r);
+ $$('#pre button').forEach(b=>b.classList.toggle('on',b.dataset.k==L.k));
+ $('#pt').innerHTML=views.map((v,i)=>`<button class="${i==view?'on':''}" onclick="sv(${i})"><b>${v[0]}</b><br><small style="color:${i==view?'var(--o)':'var(--mut)'}">${v[1]}</small></button>`).join('');
+}
+['iw:w','ih:h','ig:g','ir:r'].forEach(s=>{const[i,k]=s.split(':');$('#'+i).oninput=e=>{const v=parseFloat(e.target.value);if(!isNaN(v)){L[k]=(k=='r')?v:v/25.4;L.k=null;draw();$('#'+i).focus()}}});
+let drag=null;const svg=$('#sv1');
+function pt(e){const p=svg.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(svg.getScreenCTM().inverse())}
+svg.addEventListener('pointerdown',e=>{if(locked||!e.target.closest('#lg'))return;const p=pt(e);drag={dx:L.x-p.x,dy:L.g-(p.y-TOP-L.h*PX/2)/PX*0-(p.y)/PX,py:p.y,g0:L.g};svg.setPointerCapture(e.pointerId)});
+svg.addEventListener('pointermove',e=>{if(!drag)return;const p=pt(e);L.x=Math.max(60,Math.min(340,p.x+drag.dx));L.g=Math.max(0,drag.g0+(p.y-drag.py)/PX/zoom);L.k=null;draw()});
+svg.addEventListener('pointerup',()=>drag=null);
+$('#up').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{img=r.result;draw()};r.readAsDataURL(f)};
+/* QC proof mini */
+$('#qcs').innerHTML=`<rect width="400" height="300" fill="#d8d4d0"/><g transform="translate(50 -10) scale(.85)">${hood('#1f2430')}<polygon points="175,170 197,136 213,156 223,144 235,170" fill="#c2410c"/></g><line x1="200" y1="0" x2="200" y2="300" stroke="#e5622b" stroke-dasharray="4 4"/>`;
+rst();
+</script></body></html>
